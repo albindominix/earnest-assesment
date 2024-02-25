@@ -12,7 +12,8 @@ function InputFields({ setText, text }) {
     setText({ ...text, [name]: value });
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     if (!text.title || !text.description) {
       return;
     }
@@ -26,7 +27,7 @@ function InputFields({ setText, text }) {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4">
       <input
         name="title"
         type="text"
@@ -44,12 +45,13 @@ function InputFields({ setText, text }) {
         onChange={handleChange}
       />
       <button
-        className="bg-blue-400 p-2 outline-none text-white font-semibold hover:bg-blue-500 rounded-md"
+        className="bg-blue-400 p-2 outline-none text-white font-semibold hover:bg-blue-500 rounded-md cursor-pointer"
+        type="submit"
         onClick={handleSubmit}
       >
         submit
       </button>
-    </div>
+    </form>
   );
 }
 

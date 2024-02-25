@@ -3,26 +3,39 @@ import { useTaskContext } from '../context/ContextApi';
 
 function Table() {
 
-    const {  taskComplete, createTask, deleteTask, todo } = useTaskContext();
+const {  taskComplete, createTask, deleteTask, todo } = useTaskContext();
 
+
+if(todo.length==0){
+ return( <div className='text-lg font-bold mt-7 '>
+  Add Task to Show
+ </div>)
+}
   return (
-    <div className="border shadow-md min-w-[600px] p-2   max-h-[20rem] overflow-y-scroll flex flex-col gap-2 bg-white">
-    {todo.length === 0 && (
-      <div className="text-center font-semibold text-xl">
-        No Tasks to Show
-      </div>
-    )}
-
-    {todo &&
-      todo.map((item, index) => (
-        <div
-          key={item.id}
-          className=" border p-3 flex items-center gap-3 justify-between rounded-md flex-1"
-        >
-          <div>{item.title}</div>
-          <div>{item.description}</div>
-          <div className="flex gap-3">
-            <button
+    <div className="flex flex-col relative top-10 scale-125">
+    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div className="">
+          <table className="block h-64 overflow-y-scroll min-w-full text-left text-sm font-light mt-5 ">
+            <thead className="border-b font-medium dark:border-neutral-500 sticky top-0 bg-white">
+              <tr>
+                <th scope="col" className="px-6 py-4">Title</th>
+                <th scope="col" className="px-6 py-4">Description</th>
+                <th scope="col" className="px-6 py-4">Completed</th>
+                <th scope="col" className="px-6 py-4">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+            {todo &&
+              todo.map((item, index) => (
+                <tr
+                className="border-b  dark:border-neutral-500 dark:hover:bg-neutral-600"
+                 key={index}>
+                  
+                  <td className="whitespace-nowrap px-6 py-4">{item.title}</td>
+                  <td className="whitespace-nowrap px-6 py-4">{item.description}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                  <button
               className={`border border-blue-500  px-2 py-1 rounded-lg  ${
                 item.completed
                   ? "bg-teal-400 text-white border-none "
@@ -33,17 +46,25 @@ function Table() {
             >
               {item.completed ? "Completed" : "Complete"}
             </button>
-
-            <button
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                  <button
               className="bg-red-500 hover:bg-red-700 px-2 py-1 rounded-lg text-white"
               onClick={() => deleteTask(item.id)}
             >
               delete
-            </button>
-          </div>
+            </button></td>
+                
+                </tr>
+              ))}
+          </tbody>
+          
+          </table>
         </div>
-      ))}
-  </div>
+      </div>
+    </div>
+    </div>
+  
   )
 }
 
