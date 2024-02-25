@@ -71,29 +71,4 @@ const db = require('../utils/db')
 
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-// // Populate initial tasks
-// app.get('/init-tasks', async (req, res) => {
-
    
-  
-//       await db.query(`INSERT INTO tasks (title, description) 
-//                      VALUES 
-//                      ('Task 1', 'Do something'),
-//                      ('Task 2', 'Do something else'),
-//                      ('Task 3', 'Do another thing')`);
-      
-//       res.send('Sample tasks populated');
-  
-  
-//   });
